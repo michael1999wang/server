@@ -67,11 +67,10 @@ class RoundtripTest < MiniTest::Test
   def expect_keys(want_keys)
     keys = []
 
-    number_of_periods = (168 * 2) / PERIOD_HOURS
-    assert_equal(56, number_of_periods)
+    number_of_periods = 14
     number_of_periods.times do |n|
-      period = current_period - (PERIOD_HOURS * (n + 1))
-      resp = get_period(period)
+      dn = current_date_number - (1 + n)
+      resp = get_date(dn)
       assert_response(resp, 200, 'application/zip')
       keys.concat(parse_keys(resp))
     end
